@@ -16,7 +16,6 @@ const Register: NextPageWithLayout = () => {
         title="Register | UK Project"
         description="UK Project"
         author="UK Project"
-        image=""
       />
       <Layout>
         <section className="container px-4 sm:px-0 min-h-screen min-w-full grid grid-cols-1 justify-center items-center">

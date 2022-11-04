@@ -37,7 +37,7 @@ export default function Navigation() {
           >
             Blog
           </Link>
-          <button className="p-3.5 font-medium ring-2 hover:ring-blue-600 rounded-lg">
+          <button className="p-3.5 font-medium hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg">
             <RiMoonFoggyFill />
           </button>
           <Link

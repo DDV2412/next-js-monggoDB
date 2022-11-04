@@ -10,7 +10,6 @@ const Dashboard: NextPageWithLayout = () => {
         title="Dashboard | UK Project"
         description="UK Project"
         author="UK Project"
-        image=""
       />
       <DashboardLayout>
         <div>Dashboard</div>

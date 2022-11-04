@@ -9,7 +9,6 @@ const Blog: NextPageWithLayout = () => {
         title="Home | UK Project"
         description="UK Project"
         author="UK Project"
-        image=""
       />
       <MainLayout>
         <div>Home</div>
