@@ -5,7 +5,7 @@ export default function Navigation() {
   return (
     <nav className="fixed z-50 left-0 right-0 top-0 h-16 bg-slate-50 dark:bg-slate-900">
       <div className="container mx-auto px-4 sm:px-0 flex justify-between items-center min-h-full">
-        <div className="font-bold text-xl">Logo</div>
+        <div className="font-bold text-xl">UK Project</div>
         <ul className="sm:flex justify-end items-center gap-x-4 hidden">
           <Link
             href="/"
