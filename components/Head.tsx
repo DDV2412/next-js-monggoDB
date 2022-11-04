@@ -1,19 +1,12 @@
 import Head from "next/head";
 
 type props = {
-  description: React.MetaHTMLAttributes<HTMLMetaElement>;
-  author: React.MetaHTMLAttributes<HTMLMetaElement>;
-  title: React.MetaHTMLAttributes<HTMLMetaElement>;
-  image: React.MetaHTMLAttributes<HTMLMetaElement>;
-  hostname: React.MetaHTMLAttributes<HTMLMetaElement>;
+  description: React.MetaHTMLAttributes<HTMLMetaElement> | string;
+  author: React.MetaHTMLAttributes<HTMLMetaElement> | string;
+  title: React.MetaHTMLAttributes<HTMLMetaElement> | string;
+  image: React.MetaHTMLAttributes<HTMLMetaElement> | string;
 };
-export default function HeadMeta({
-  description,
-  author,
-  title,
-  image,
-  hostname,
-}: props) {
+export default function HeadMeta({ description, author, title, image }: props) {
   return (
     <Head>
       <title>{`${title}`}</title>
@@ -30,7 +23,7 @@ export default function HeadMeta({
       ></meta>
       {/* Twitter MetaTag */}
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:site" content={`${hostname}`} />
+      <meta name="twitter:site" content="uk-project.my.id" />
       <meta name="twitter:title" content={`${title}`} />
       <meta name="twitter:description" content={`${description}`} />
       <meta name="twitter:image" content={`${image}`} />
@@ -39,7 +32,7 @@ export default function HeadMeta({
       <meta property="og:type" content="article" />
       <meta property="og:title" content={`${title}`} />
       <meta property="og:description" content={`${description}`} />
-      <meta property="og:url" content={`${hostname}`} />
+      <meta property="og:url" content="uk-project.my.id" />
       <meta property="og:image" content={`${image}`} />
     </Head>
   );
