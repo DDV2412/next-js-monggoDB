@@ -1,15 +1,15 @@
-import { NexPageWithLayout } from "./_app";
+import { NextPageWithLayout } from "./_app";
 import Layout from "../components/Layout";
 import HeadMeta from "../components/Head";
 import {
-  AiOutlineUser,
-  AiOutlineGoogle,
-  AiFillFacebook,
-  AiOutlineMail,
-} from "react-icons/ai";
+  RiUser3Line,
+  RiGoogleFill,
+  RiFacebookFill,
+  RiMailLine,
+} from "react-icons/ri";
 import Link from "next/link";
 
-const Register: NexPageWithLayout = () => {
+const Register: NextPageWithLayout = () => {
   return (
     <>
       <HeadMeta
@@ -33,7 +33,7 @@ const Register: NexPageWithLayout = () => {
                   <div
                     className={`absolute p-4 top-0 left-0 text-slate-900 dark:text-slate-50 opacity-50`}
                   >
-                    <AiOutlineUser />
+                    <RiUser3Line />
                   </div>
                   <input
                     type="text"
@@ -46,7 +46,7 @@ const Register: NexPageWithLayout = () => {
                   <div
                     className={`absolute p-4 top-0 left-0 text-slate-900 dark:text-slate-50 opacity-50`}
                   >
-                    <AiOutlineUser />
+                    <RiUser3Line />
                   </div>
                   <input
                     type="text"
@@ -59,7 +59,7 @@ const Register: NexPageWithLayout = () => {
                   <div
                     className={`absolute p-4 top-0 left-0 text-slate-900 dark:text-slate-50 opacity-50`}
                   >
-                    <AiOutlineUser />
+                    <RiUser3Line />
                   </div>
                   <input
                     type="text"
@@ -72,7 +72,7 @@ const Register: NexPageWithLayout = () => {
                   <div
                     className={`absolute p-4 top-0 left-0 text-slate-900 dark:text-slate-50 opacity-50`}
                   >
-                    <AiOutlineMail />
+                    <RiMailLine />
                   </div>
                   <input
                     type="text"
@@ -90,11 +90,11 @@ const Register: NexPageWithLayout = () => {
               </p>
               <div className="flex justify-center items-center gap-x-4">
                 <button className="mt-4 flex justify-center items-center gap-x-3 bg-rose-700 text-slate-50 py-2.5 rounded-xl sm:w-[40%] hover:opacity-80 px-6 mx-auto">
-                  <AiOutlineGoogle />
+                  <RiGoogleFill />
                   Google
                 </button>
                 <button className="mt-4 flex justify-center items-center gap-x-3 bg-blue-900 text-slate-50 py-2.5 rounded-xl sm:w-[40%] hover:opacity-80 px-6 mx-auto">
-                  <AiFillFacebook />
+                  <RiFacebookFill />
                   Facebook
                 </button>
               </div>

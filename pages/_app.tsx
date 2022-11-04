@@ -2,12 +2,12 @@ import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import type { NextPage } from "next";
 
-export type NexPageWithLayout = NextPage & {
+export type NextPageWithLayout = NextPage & {
   getLayout?: (page: React.ReactElement) => React.ReactNode;
 };
 
 type AppPropsLayout = AppProps & {
-  Component: NexPageWithLayout;
+  Component: NextPageWithLayout;
 };
 
 function MyApp({ Component, pageProps }: AppPropsLayout) {

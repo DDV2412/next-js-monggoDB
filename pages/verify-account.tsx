@@ -1,10 +1,10 @@
-import { NexPageWithLayout } from "./_app";
-import { AiOutlineLock } from "react-icons/ai";
+import { NextPageWithLayout } from "./_app";
+import { RiLockPasswordLine } from "react-icons/ri";
 import Link from "next/link";
 import Layout from "../components/Layout";
 import HeadMeta from "../components/Head";
 
-const VerifyAccount: NexPageWithLayout = () => {
+const VerifyAccount: NextPageWithLayout = () => {
   return (
     <>
       <HeadMeta
@@ -27,7 +27,7 @@ const VerifyAccount: NexPageWithLayout = () => {
               <form className="grid grid-cols-1 mt-4">
                 <div className="relative mt-5">
                   <div className="absolute p-4 top-0 left-0 text-slate-900 dark:text-slate-50 opacity-50">
-                    <AiOutlineLock />
+                    <RiLockPasswordLine />
                   </div>
                   <input
                     type="text"
@@ -38,7 +38,7 @@ const VerifyAccount: NexPageWithLayout = () => {
                 </div>
                 <div className="relative mt-5">
                   <div className="absolute p-4 top-0 left-0 text-slate-900 dark:text-slate-50 opacity-50">
-                    <AiOutlineLock />
+                    <RiLockPasswordLine />
                   </div>
                   <input
                     type="text"

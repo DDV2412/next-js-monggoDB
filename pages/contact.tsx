@@ -1,8 +1,8 @@
-import { NextPageWithLayout } from "./_app";
 import MainLayout from "../components/MainLayout";
+import { NextPageWithLayout } from "./_app";
 import HeadMeta from "../components/Head";
 
-const Home: NextPageWithLayout = () => {
+const Contact: NextPageWithLayout = () => {
   return (
     <>
       <HeadMeta
@@ -18,4 +18,4 @@ const Home: NextPageWithLayout = () => {
   );
 };
 
-export default Home;
+export default Contact;
