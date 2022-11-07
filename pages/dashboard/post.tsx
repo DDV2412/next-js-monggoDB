@@ -2,19 +2,20 @@ import { NextPageWithLayout } from "../_app";
 import React from "react";
 import DashboardLayout from "../../components/DashboardLayout";
 import HeadMeta from "../../components/Head";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   RiPencilFill,
   RiSaveLine,
   RiShareLine,
   RiDeleteBin4Line,
+  RiCloseLine,
 } from "react-icons/ri";
 import CKEditor from "../../components/CKEditor";
 
 const BlogPost: NextPageWithLayout = () => {
   const [showForm, setShowForm] = useState(false);
   const [editorLoaded, setEditorLoaded] = useState(false);
-  const [data, setData] = useState("");
+  const [data, setData] = useState();
 
   return (
     <>
@@ -51,11 +52,30 @@ const BlogPost: NextPageWithLayout = () => {
         </section>
 
         <section
-          className={`fixed top-24 bg-slate-100/30 w-full sm:w-[80%] right-0 dark:bg-slate-900/30 backdrop-blur-md ease-in-out duration-300 min-h-full rounded-xl p-6 ${
+          className={`fixed top-24 bg-slate-100/30 overflow-y-auto w-full sm:w-[80%] right-0 dark:bg-slate-900/30 backdrop-blur-md ease-in-out duration-300 min-h-full rounded-xl p-6 ${
             showForm ? "translate-x-0" : "translate-x-full"
           }`}
         >
-          <h1>Create Content</h1>
+          <div className="flex justify-between items-center">
+            <h1 className="font-semibold">Create Content</h1>
+            <div className="flex justify-start items-center gap-4">
+              <button className="w-max flex justify-center items-center p-2.5 rounded-xl bg-blue-700 hover:opacity-80 text-slate-50">
+                <RiSaveLine />
+              </button>
+              <button className="w-max flex justify-center items-center p-2.5 rounded-xl bg-orange-700 hover:opacity-80 text-slate-50">
+                <RiShareLine />
+              </button>
+              <button className="w-max flex justify-center items-center p-2.5 rounded-xl bg-rose-700 hover:opacity-80 text-slate-50">
+                <RiDeleteBin4Line />
+              </button>
+              <button
+                onClick={() => setShowForm(false)}
+                className="w-max flex justify-center items-center p-2.5 rounded-xl bg-slate-400 hover:opacity-80 text-slate-50"
+              >
+                <RiCloseLine />
+              </button>
+            </div>
+          </div>
           <form className="grid grid-cols-1 mt-4">
             <div className="relative mt-5">
               <div
@@ -91,17 +111,6 @@ const BlogPost: NextPageWithLayout = () => {
                 }}
                 editorLoaded={editorLoaded}
               />
-              <div className="mt-6 flex justify-start items-center gap-4">
-                <button className="w-max flex justify-center items-center p-2.5 rounded-xl bg-blue-700 hover:opacity-80 text-slate-50">
-                  <RiSaveLine />
-                </button>
-                <button className="w-max flex justify-center items-center p-2.5 rounded-xl bg-orange-700 hover:opacity-80 text-slate-50">
-                  <RiShareLine />
-                </button>
-                <button className="w-max flex justify-center items-center p-2.5 rounded-xl bg-rose-700 hover:opacity-80 text-slate-50">
-                  <RiDeleteBin4Line />
-                </button>
-              </div>
             </div>
           </form>
         </section>

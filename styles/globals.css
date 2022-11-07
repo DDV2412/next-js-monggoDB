@@ -22,3 +22,39 @@ a {
 * {
   box-sizing: border-box;
 }
+.ck.ck-editor__main > .ck-editor__editable {
+  min-height: 20rem;
+  background: #f8fafc !important;
+}
+
+.dark .ck.ck-editor__main > .ck-editor__editable {
+  background: #0f172a !important;
+}
+
+.ck.ck-toolbar {
+  background: #f8fafc !important;
+  color: #0f172a;
+}
+
+.dark .ck.ck-toolbar {
+  background: #0f172a !important;
+  color: #f8fafc;
+}
+
+.ck.ck-icon.ck-icon_inherit-color,
+.ck.ck-icon.ck-icon_inherit-color * {
+  color: #0f172a !important;
+}
+
+.dark .ck.ck-icon.ck-icon_inherit-color,
+.dark .ck.ck-icon.ck-icon_inherit-color * {
+  color: #f8fafc !important;
+}
+
+.ck.ck-dropdown .ck-button.ck-dropdown__button {
+  color: #0f172a !important;
+}
+
+.dark .ck.ck-dropdown .ck-button.ck-dropdown__button {
+  color: #f8fafc !important;
+}
