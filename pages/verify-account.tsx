@@ -3,8 +3,41 @@ import { RiLockPasswordLine } from "react-icons/ri";
 import Link from "next/link";
 import Layout from "../components/Layout";
 import HeadMeta from "../components/Head";
+import { useState } from "react";
+import { useRouter } from "next/router";
 
 const VerifyAccount: NextPageWithLayout = () => {
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const { query, push } = useRouter();
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [message, setMessage] = useState("");
+
+  const onVerify = async (e: any) => {
+    e.preventDefault();
+
+    const res = await fetch(`/api/auth/verify-account`, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        password: password,
+        confirmPassword: confirmPassword,
+        token: query.token,
+      }),
+    });
+
+    const result = await res.json();
+
+    setIsSuccess(result.status);
+    setMessage(result.message);
+
+    if (isSuccess == true) {
+      push("/login");
+    }
+  };
+
   return (
     <>
       <HeadMeta
@@ -23,16 +56,25 @@ const VerifyAccount: NextPageWithLayout = () => {
                 Now that you have verified your email address, please set up a
                 password for your account
               </p>
-              <form className="grid grid-cols-1 mt-4">
+              <form onSubmit={onVerify} className="grid grid-cols-1 mt-4">
+                {message && isSuccess ? (
+                  <p className="text-green-700 font-medium text-sm">
+                    {message}
+                  </p>
+                ) : (
+                  <p className="text-rose-700 font-medium text-sm">{message}</p>
+                )}
                 <div className="relative mt-5">
                   <div className="absolute p-4 top-0 left-0 text-slate-900 dark:text-slate-50 opacity-50">
                     <RiLockPasswordLine />
                   </div>
                   <input
-                    type="text"
+                    type="password"
                     className="rounded-xl pl-12 text-sm pr-4 py-3.5 focus:ring-2 outline-none w-full ring-blue-500/80 bg-slate-50 dark:bg-slate-900"
                     placeholder="Enter your Password"
                     name="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
                 <div className="relative mt-5">
@@ -40,13 +82,18 @@ const VerifyAccount: NextPageWithLayout = () => {
                     <RiLockPasswordLine />
                   </div>
                   <input
-                    type="text"
+                    type="password"
                     className="rounded-xl pl-12 text-sm pr-4 py-3.5 focus:ring-2 outline-none w-full ring-blue-500/80 bg-slate-50 dark:bg-slate-900"
                     placeholder="Enter your Confirm Password"
                     name="confirmPassword"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
                   />
                 </div>
-                <button className="w-2/3 sm:w-1/2 mx-auto mt-6 flex justify-center items-center py-2.5 px-10 rounded-xl bg-blue-700 hover:opacity-80 text-slate-50">
+                <button
+                  type="submit"
+                  className="w-max mx-auto mt-6 flex flex-nowrap justify-center items-center py-2.5 px-10 rounded-xl bg-blue-700 hover:opacity-80 text-slate-50"
+                >
                   Save Password
                 </button>
               </form>

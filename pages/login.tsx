@@ -8,8 +8,39 @@ import {
   RiFacebookFill,
 } from "react-icons/ri";
 import Link from "next/link";
+import { useState } from "react";
+import { useRouter } from "next/router";
 
 const Login: NextPageWithLayout = () => {
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [message, setMessage] = useState("");
+  const { push } = useRouter();
+
+  const onLogin = async (e: any) => {
+    e.preventDefault();
+
+    let res = await fetch(`/api/auth/login`, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userName: userName,
+        password: password,
+      }),
+    });
+
+    const result = await res.json();
+
+    setIsSuccess(result.status);
+    setMessage(result.message);
+
+    if (isSuccess == true) {
+      push("/dashboard");
+    }
+  };
   return (
     <>
       <HeadMeta
@@ -27,7 +58,14 @@ const Login: NextPageWithLayout = () => {
               <p className="text-sm font-light dark:text-slate-50 text-center">
                 Log in to your existant account of UK Project
               </p>
-              <form className="grid grid-cols-1 mt-4">
+              <form onSubmit={onLogin} className="grid grid-cols-1 mt-4">
+                {message && isSuccess ? (
+                  <p className="text-green-700 font-medium text-sm">
+                    {message}
+                  </p>
+                ) : (
+                  <p className="text-rose-700 font-medium text-sm">{message}</p>
+                )}
                 <div className="relative mt-5">
                   <div
                     className={`absolute p-4 top-0 left-0 text-slate-900 dark:text-slate-50 opacity-50`}
@@ -39,6 +77,8 @@ const Login: NextPageWithLayout = () => {
                     className="rounded-xl pl-12 text-sm pr-4 py-3.5 focus:ring-2 outline-none w-full ring-blue-500/80 bg-slate-50 dark:bg-slate-900"
                     placeholder="Username or Email"
                     name="userName"
+                    value={userName}
+                    onChange={(e) => setUserName(e.target.value)}
                   />
                 </div>
                 <div className="relative mt-5">
@@ -52,12 +92,17 @@ const Login: NextPageWithLayout = () => {
                     className="rounded-xl pl-12 text-sm pr-4 py-3.5 focus:ring-2 outline-none w-full ring-blue-500/80 bg-slate-50 dark:bg-slate-900"
                     placeholder="Password"
                     name="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
                 <div className="mt-2 w-full flex justify-end items-center text-sm font-medium text-slate-500 dark:text-slate-400">
                   <Link href="">Forgot Password?</Link>
                 </div>
-                <button className="w-2/3 sm:w-1/2 mx-auto mt-6 flex justify-center items-center py-2.5 px-10 rounded-xl bg-blue-700 hover:opacity-80 text-slate-50">
+                <button
+                  type="submit"
+                  className="w-2/3 sm:w-1/2 mx-auto mt-6 flex justify-center items-center py-2.5 px-10 rounded-xl bg-blue-700 hover:opacity-80 text-slate-50"
+                >
                   Login
                 </button>
               </form>

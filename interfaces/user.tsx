@@ -5,8 +5,8 @@ export interface user {
   email: string;
   password: string;
   isEnable: boolean;
-  createdAt: Date;
-  updatedAt: Date;
-  resetPasswordToken: string;
-  resetPasswordExpired: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
+  resetPasswordToken?: string;
+  resetPasswordExpired?: Date;
 }

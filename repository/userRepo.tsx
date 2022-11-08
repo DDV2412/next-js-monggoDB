@@ -1,5 +1,8 @@
 import { user as UserType } from "../interfaces/user";
 import UserSchema from "../models/user";
+import connection from "../database/connection";
+
+connection();
 
 class UserRepo {
   User: typeof UserSchema;
@@ -9,9 +12,7 @@ class UserRepo {
 
   userByEmail = async (user: UserType) => {
     try {
-      const data = await this.User.findOne({ email: user["email"] });
-
-      return data;
+      return await this.User.findOne({ email: user["email"] });
     } catch (error) {
       return null;
     }
@@ -19,9 +20,7 @@ class UserRepo {
 
   userByUserName = async (user: UserType) => {
     try {
-      const data = await this.User.findOne({ userName: user["userName"] });
-
-      return data;
+      return await this.User.findOne({ userName: user["userName"] });
     } catch (error) {
       return null;
     }

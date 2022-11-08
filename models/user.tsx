@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import { user } from "../interfaces/user";
-import crypto from "crypto";
 const Schema = mongoose.Schema;
 
 let UserSchema = new Schema<user>({
@@ -35,7 +34,6 @@ let UserSchema = new Schema<user>({
     type: String,
     required: true,
     trim: true,
-    minlength: 10,
   },
   createdAt: {
     type: Date,
@@ -45,8 +43,6 @@ let UserSchema = new Schema<user>({
     type: Date,
     default: null,
   },
-  resetPasswordToken: String,
-  resetPasswordExpired: Date,
 });
 
-export default mongoose.model("users", UserSchema);
+export default mongoose.models.User || mongoose.model("User", UserSchema);

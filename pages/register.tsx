@@ -8,8 +8,44 @@ import {
   RiMailLine,
 } from "react-icons/ri";
 import Link from "next/link";
+import { useState } from "react";
 
 const Register: NextPageWithLayout = () => {
+  const [data, setData] = useState({
+    userName: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+  });
+  const [isSuccess, setIsSuccess] = useState(false);
+  const { userName, firstName, lastName, email } = data;
+  const [message, setMessage] = useState("");
+
+  const onChangeData = (e: any) => {
+    setData({ ...data, [e.target.name]: e.target.value });
+  };
+
+  const onRegister = async (e: any) => {
+    e.preventDefault();
+
+    let res = await fetch(`/api/auth/register`, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    const result = await res.json();
+
+    setIsSuccess(result.status);
+    setMessage(result.message);
+
+    setData({ userName: "", firstName: "", lastName: "", email: "" });
+
+    e.target.reset;
+  };
+
   return (
     <>
       <HeadMeta
@@ -27,7 +63,15 @@ const Register: NextPageWithLayout = () => {
               <p className="text-sm font-light dark:text-slate-50 text-center">
                 Create an account to UK Project to get all featrues
               </p>
-              <form className="grid grid-cols-1 mt-4">
+
+              <form onSubmit={onRegister} className="grid grid-cols-1 mt-5">
+                {message && isSuccess ? (
+                  <p className="text-green-700 font-medium text-sm">
+                    {message}
+                  </p>
+                ) : (
+                  <p className="text-rose-700 font-medium text-sm">{message}</p>
+                )}
                 <div className="relative mt-5">
                   <div
                     className={`absolute p-4 top-0 left-0 text-slate-900 dark:text-slate-50 opacity-50`}
@@ -39,6 +83,8 @@ const Register: NextPageWithLayout = () => {
                     className="rounded-xl pl-12 text-sm pr-4 py-3.5 focus:ring-2 outline-none w-full ring-blue-500/80 bg-slate-50 dark:bg-slate-900"
                     placeholder="Enter your Username"
                     name="userName"
+                    value={userName}
+                    onChange={onChangeData}
                   />
                 </div>
                 <div className="relative mt-5">
@@ -52,6 +98,8 @@ const Register: NextPageWithLayout = () => {
                     className="rounded-xl pl-12 text-sm pr-4 py-3.5 focus:ring-2 outline-none w-full ring-blue-500/80 bg-slate-50 dark:bg-slate-900"
                     placeholder="Enter your Firstname"
                     name="firstName"
+                    value={firstName}
+                    onChange={onChangeData}
                   />
                 </div>
                 <div className="relative mt-5">
@@ -65,6 +113,8 @@ const Register: NextPageWithLayout = () => {
                     className="rounded-xl pl-12 text-sm pr-4 py-3.5 focus:ring-2 outline-none w-full ring-blue-500/80 bg-slate-50 dark:bg-slate-900"
                     placeholder="Enter your Lastname"
                     name="lastName"
+                    value={lastName}
+                    onChange={onChangeData}
                   />
                 </div>
                 <div className="relative mt-5">
@@ -78,9 +128,14 @@ const Register: NextPageWithLayout = () => {
                     className="rounded-xl pl-12 text-sm pr-4 py-3.5 focus:ring-2 outline-none w-full ring-blue-500/80 bg-slate-50 dark:bg-slate-900"
                     placeholder="Enter your email"
                     name="email"
+                    value={email}
+                    onChange={onChangeData}
                   />
                 </div>
-                <button className="w-2/3 sm:w-1/2 mx-auto mt-6 flex justify-center items-center py-2.5 px-10 rounded-xl bg-blue-700 hover:opacity-80 text-slate-50">
+                <button
+                  type="submit"
+                  className="w-2/3 sm:w-1/2 mx-auto mt-6 flex justify-center items-center py-2.5 px-10 rounded-xl bg-blue-700 hover:opacity-80 text-slate-50"
+                >
                   Register
                 </button>
               </form>
