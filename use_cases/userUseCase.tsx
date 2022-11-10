@@ -1,4 +1,5 @@
 import { user as UserType } from "../interfaces/user";
+import { encode } from "../utils/jwt";
 
 class UserUseCase {
   UserRepo: any;
@@ -6,14 +7,29 @@ class UserUseCase {
     this.UserRepo = userRepo;
   }
 
-  userByEmail = async (user: UserType) => {
-    return this.UserRepo.userByEmail(user);
+  createToken = (data: UserType) => {
+    const payload = {
+      userName: data.userName,
+      firstName: data.firstName,
+      lastName: data.lastName,
+    };
+
+    return {
+      user: payload,
+      token: encode(payload),
+    };
   };
-  userByUserName = async (user: UserType) => {
-    return this.UserRepo.userByUserName(user);
+  userLogin = async (user: UserType) => {
+    const data = await this.UserRepo.userByUserName(user);
+
+    if (data == null) {
+      return null;
+    }
+
+    return this.createToken(data);
   };
   userRegister = async (user: UserType) => {
-    return this.UserRepo.userRegister(user);
+    return await this.UserRepo.userRegister(user);
   };
 }
 

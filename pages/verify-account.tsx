@@ -3,7 +3,7 @@ import { RiLockPasswordLine } from "react-icons/ri";
 import Link from "next/link";
 import Layout from "../components/Layout";
 import HeadMeta from "../components/Head";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
 const VerifyAccount: NextPageWithLayout = () => {
@@ -32,11 +32,13 @@ const VerifyAccount: NextPageWithLayout = () => {
 
     setIsSuccess(result.status);
     setMessage(result.message);
+  };
 
+  useEffect(() => {
     if (isSuccess == true) {
       push("/login");
     }
-  };
+  }, [isSuccess, push]);
 
   return (
     <>

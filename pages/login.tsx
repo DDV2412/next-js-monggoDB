@@ -8,7 +8,7 @@ import {
   RiFacebookFill,
 } from "react-icons/ri";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
 const Login: NextPageWithLayout = () => {
@@ -36,11 +36,13 @@ const Login: NextPageWithLayout = () => {
 
     setIsSuccess(result.status);
     setMessage(result.message);
+  };
 
+  useEffect(() => {
     if (isSuccess == true) {
       push("/dashboard");
     }
-  };
+  }, [isSuccess, push]);
   return (
     <>
       <HeadMeta
